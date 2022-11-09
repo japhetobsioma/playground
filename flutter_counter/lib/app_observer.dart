@@ -12,7 +12,10 @@ class AppObserver extends ProviderObserver {
     ProviderContainer container,
   ) {
     if (kDebugMode) {
-      print('${provider.name ?? provider.runtimeType} $newValue');
+      print(
+        '${provider.name ?? provider.runtimeType} '
+        '(previousValue: $previousValue, newValue: $newValue)',
+      );
     }
   }
 }
