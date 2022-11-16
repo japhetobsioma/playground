@@ -4,52 +4,58 @@ import 'package:flutter_timer/timer/provider/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class TimerNotifier extends AutoDisposeNotifier<TimerState> {
-  TimerNotifier({required Ticker ticker}) : _ticker = ticker;
+  TimerNotifier({
+    TimerState? overrideState,
+  }) : _overrideState = overrideState;
 
-  final Ticker _ticker;
+  final TimerState? _overrideState;
   StreamSubscription<int>? _tickerSubscription;
+
+  final TimerState _initialState = const TimerState(
+    duration: 60,
+    status: TimerStatus.initial,
+  );
+
+  late final int _duration = _overrideState?.duration ?? _initialState.duration;
 
   @override
   TimerState build() {
     ref.onDispose(() => _tickerSubscription?.cancel());
 
-    return const TimerState(
-      event: TimerEvent.initial,
-      status: TimerStatus.initial,
-      duration: 5,
+    return _overrideState ?? _initialState;
+  }
+
+  Stream<int> _tick() {
+    final streamPeriodic = Stream.periodic(
+      const Duration(seconds: 1),
+      (x) => _duration - x - 1,
     );
+
+    return streamPeriodic.take(_duration);
   }
 
   void start() {
     state = state.copyWith(
-      event: TimerEvent.started,
       status: TimerStatus.runInProgress,
     );
 
     _tickerSubscription?.cancel();
-    _tickerSubscription =
-        _ticker.tick(ticks: state.duration).listen((duration) {
+    _tickerSubscription = _tick().listen((duration) {
       if (duration > 0) {
         state = state.copyWith(
-          event: TimerEvent.ticked,
           status: TimerStatus.runInProgress,
           duration: duration,
         );
       } else {
         state = state.copyWith(
-          event: TimerEvent.ticked,
           status: TimerStatus.runComplete,
           duration: duration,
         );
-
-        _tickerSubscription?.cancel();
       }
     });
   }
 
   void pause() {
-    state = state.copyWith(event: TimerEvent.paused);
-
     if (state.status == TimerStatus.runInProgress) {
       _tickerSubscription?.pause();
       state = state.copyWith(status: TimerStatus.runPause);
@@ -57,8 +63,6 @@ class TimerNotifier extends AutoDisposeNotifier<TimerState> {
   }
 
   void resume() {
-    state = state.copyWith(event: TimerEvent.resumed);
-
     if (state.status == TimerStatus.runPause) {
       _tickerSubscription?.resume();
       state = state.copyWith(status: TimerStatus.runInProgress);
@@ -66,14 +70,12 @@ class TimerNotifier extends AutoDisposeNotifier<TimerState> {
   }
 
   void reset() {
-    state = state.copyWith(event: TimerEvent.reset);
-
     _tickerSubscription?.cancel();
-    state = state.copyWith(status: TimerStatus.initial, duration: 5);
+    state = state.copyWith(status: TimerStatus.initial, duration: _duration);
   }
 }
 
 final timerProvider = AutoDisposeNotifierProvider<TimerNotifier, TimerState>(
-  () => TimerNotifier(ticker: Ticker()),
+  TimerNotifier.new,
   name: 'TimerProvider',
 );

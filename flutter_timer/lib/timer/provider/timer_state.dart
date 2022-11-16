@@ -4,24 +4,20 @@ import 'package:flutter_timer/timer/provider/provider.dart';
 @immutable
 class TimerState {
   const TimerState({
-    required this.event,
-    required this.status,
     required this.duration,
+    required this.status,
   });
 
-  final TimerEvent event;
-  final TimerStatus status;
   final int duration;
+  final TimerStatus status;
 
   TimerState copyWith({
-    TimerEvent? event,
-    TimerStatus? status,
     int? duration,
+    TimerStatus? status,
   }) {
     return TimerState(
-      event: event ?? this.event,
-      status: status ?? this.status,
       duration: duration ?? this.duration,
+      status: status ?? this.status,
     );
   }
 
@@ -29,16 +25,12 @@ class TimerState {
   bool operator ==(covariant TimerState other) {
     if (identical(this, other)) return true;
 
-    return other.event == event &&
-        other.status == status &&
-        other.duration == duration;
+    return other.duration == duration && other.status == status;
   }
 
   @override
-  int get hashCode => event.hashCode ^ status.hashCode ^ duration.hashCode;
+  int get hashCode => duration.hashCode ^ status.hashCode;
 
   @override
-  String toString() {
-    return 'TimerState(event: $event, status: $status, duration: $duration)';
-  }
+  String toString() => 'TimerState(duration: $duration, status: $status)';
 }
