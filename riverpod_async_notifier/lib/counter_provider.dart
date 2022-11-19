@@ -18,9 +18,9 @@ class CounterNotifier extends AutoDisposeAsyncNotifier<int> {
     );
 
     if (result is AsyncError) {
-      state = AsyncError(result.error, result.stackTrace);
+      state = AsyncError(result.error!, result.stackTrace!);
     } else {
-      state = AsyncData(newState);
+      await update((data) => result.requireValue);
     }
   }
 }
@@ -37,9 +37,9 @@ class CounterRepository {
     return Future<int>.delayed(const Duration(seconds: 2), () => 10);
   }
 
-  Future<void> saveCounter(int counter) async {
+  Future<int> saveCounter(int counter) async {
     // await Future<void>.delayed(const Duration(seconds: 2));
-    throw Error.throwWithStackTrace('Test', StackTrace.current);
+    throw Exception('Test');
   }
 }
 
