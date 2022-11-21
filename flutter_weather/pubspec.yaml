@@ -1,0 +1,26 @@
+name: flutter_weather
+description: A new Flutter project.
+publish_to: 'none' 
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.4 <3.0.0'
+
+dependencies:
+  beamer: ^0.12.3
+  dio: ^4.0.6
+  flutter:
+    sdk: flutter
+  flutter_hooks: ^0.18.5+1
+  hooks_riverpod: ^2.1.1
+  open_meteo_api:
+    path: packages/open_meteo_api
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^0.3.0
+  very_good_analysis: ^3.1.0
+
+flutter:
+  uses-material-design: true

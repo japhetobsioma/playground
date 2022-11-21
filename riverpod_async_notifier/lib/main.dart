@@ -60,7 +60,7 @@ class IncrementButton extends ConsumerWidget {
 
     return state.maybeWhen(
       data: (_) => FloatingActionButton(
-        onPressed: () async => ref.read(counterProvider.notifier).increment(),
+        onPressed: () async => ref.invalidate(counterProvider),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
@@ -79,6 +79,7 @@ class CounterText extends ConsumerWidget {
 
     return Text(
       state.when(
+        skipLoadingOnRefresh: false,
         data: (data) => '$data',
         error: (_, __) => 'Error',
         loading: () => 'Loading',
