@@ -7,13 +7,13 @@ environment:
   sdk: '>=2.18.4 <3.0.0'
 
 dependencies:
+  beamer: ^0.12.3
   flutter:
     sdk: flutter
-  hooks_riverpod: ^2.1.1
   flutter_hooks: ^0.18.5+1
-  graphql: ^5.1.2-beta.5
   gql_dio_link: ^0.2.4
-  beamer: ^0.12.3
+  graphql: ^5.1.2-beta.5
+  hooks_riverpod: ^2.1.1
 
 dev_dependencies:
   flutter_test:

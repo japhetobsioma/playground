@@ -11,8 +11,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('Building MyApp');
-
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -30,8 +28,6 @@ class MyHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print('Building MyHomePage');
-
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -55,7 +51,6 @@ class IncrementButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print('Building IncrementButton');
     final state = ref.watch(counterProvider);
 
     return state.maybeWhen(
@@ -74,7 +69,6 @@ class CounterText extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print('Building CounterText');
     final state = ref.watch(counterProvider);
 
     return Text(

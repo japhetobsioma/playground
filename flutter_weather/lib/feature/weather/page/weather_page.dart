@@ -50,9 +50,7 @@ class _Weather extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(weatherProvider);
-    ref.listen(weatherProvider, (previous, next) {
-      print('previous: $previous, next: $next');
-    });
+    ref.listen(weatherProvider, (previous, next) {});
 
     return state.when(
       skipLoadingOnRefresh: false,
