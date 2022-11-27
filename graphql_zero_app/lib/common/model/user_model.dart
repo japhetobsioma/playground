@@ -1,4 +1,4 @@
-import 'package:graphql_zero_app/feature/home/domain/entity/entity.dart';
+import 'package:graphql_zero_app/common/model/model.dart';
 
 class UserModel extends User {
   const UserModel({

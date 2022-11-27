@@ -1,4 +1,4 @@
-import 'package:graphql_zero_app/feature/home/data/model/post_model.dart';
+import 'package:graphql_zero_app/common/model/model.dart';
 
 abstract class HomeRemoteSource {
   Future<List<PostModel>> getPosts();

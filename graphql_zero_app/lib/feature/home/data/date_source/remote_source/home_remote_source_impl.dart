@@ -1,6 +1,6 @@
 import 'package:graphql/client.dart';
+import 'package:graphql_zero_app/common/model/model.dart';
 import 'package:graphql_zero_app/feature/home/data/date_source/remote_source/remote_source.dart';
-import 'package:graphql_zero_app/feature/home/data/model/model.dart';
 
 class HomeRemoteSourceImpl implements HomeRemoteSource {
   const HomeRemoteSourceImpl(GraphQLClient client) : _client = client;
@@ -20,6 +20,13 @@ class HomeRemoteSourceImpl implements HomeRemoteSource {
               id
               name
               username
+            }
+            comments {
+              data {
+                id
+                name
+                body
+              }
             }
           }
         }

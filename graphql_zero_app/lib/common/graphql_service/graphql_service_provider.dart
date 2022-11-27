@@ -8,7 +8,7 @@ class GraphQLServiceNotifier extends Notifier<GraphQLClient> {
   @override
   GraphQLClient build() {
     const endpoint = 'https://graphqlzero.almansi.me/api';
-    final cancelToken = ref.read(cancelTokenProvider);
+    final cancelToken = ref.watch(cancelTokenProvider);
     final dioClient = Dio()
       ..interceptors.add(
         InterceptorsWrapper(
@@ -23,6 +23,10 @@ class GraphQLServiceNotifier extends Notifier<GraphQLClient> {
     return GraphQLClient(
       link: dioLink,
       cache: GraphQLCache(),
+      defaultPolicies: DefaultPolicies(
+        query: Policies(fetch: FetchPolicy.noCache),
+        mutate: Policies(fetch: FetchPolicy.noCache),
+      ),
     );
   }
 }
@@ -30,4 +34,5 @@ class GraphQLServiceNotifier extends Notifier<GraphQLClient> {
 final graphqlServiceProvider =
     NotifierProvider<GraphQLServiceNotifier, GraphQLClient>(
   GraphQLServiceNotifier.new,
+  dependencies: [cancelTokenProvider],
 );

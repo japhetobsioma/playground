@@ -1,4 +1,4 @@
-import 'package:graphql_zero_app/feature/home/domain/entity/entity.dart';
+import 'package:graphql_zero_app/common/model/model.dart';
 import 'package:graphql_zero_app/feature/home/domain/repository/home_repository.dart';
 
 class GetPostsUseCase {

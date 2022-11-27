@@ -1,5 +1,5 @@
+import 'package:graphql_zero_app/common/model/post_entity.dart';
 import 'package:graphql_zero_app/feature/home/data/date_source/remote_source/remote_source.dart';
-import 'package:graphql_zero_app/feature/home/domain/entity/post_entity.dart';
 import 'package:graphql_zero_app/feature/home/domain/repository/repository.dart';
 
 class HomeRepositoryImpl implements HomeRepository {
