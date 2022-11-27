@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_zero_app/feature/home/presentation/provider/provider.dart';
+import 'package:graphql_zero_app/feature/post/presentation/page/page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HomePostList extends ConsumerWidget {
@@ -20,7 +21,13 @@ class HomePostList extends ConsumerWidget {
               title: Text('${post.user.name} ${post.user.username}'),
               subtitle: Text(post.title),
               trailing: const Icon(Icons.keyboard_arrow_right),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute<void>(
+                    builder: (context) => const PostPage(),
+                  ),
+                );
+              },
             );
           },
         );
