@@ -1,7 +1,7 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:graphql_zero_app/common/routing/routing.dart';
 import 'package:graphql_zero_app/feature/home/presentation/provider/provider.dart';
-import 'package:graphql_zero_app/feature/post/presentation/page/page.dart';
-import 'package:graphql_zero_app/feature/post/presentation/provider/post_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HomePostList extends ConsumerWidget {
@@ -39,17 +39,8 @@ class _DataWidget extends StatelessWidget {
           subtitle: Text('By ${user.name} (@${user.username})'),
           trailing: const Icon(Icons.keyboard_arrow_right),
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) {
-                  return ProviderScope(
-                    overrides: [
-                      postProvider.overrideWith(() => PostNotifier(post.id))
-                    ],
-                    child: const PostPage(),
-                  );
-                },
-              ),
+            Beamer.of(context).beamToNamed(
+              '${PostLocation.route}?id=${post.id}',
             );
           },
         );
