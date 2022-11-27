@@ -26,8 +26,9 @@ class _DataWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
       itemCount: data.posts.length,
+      separatorBuilder: (_, __) => const Divider(height: 1),
       itemBuilder: (context, index) {
         final post = data.posts[index];
         final user = post.user;

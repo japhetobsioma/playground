@@ -15,10 +15,8 @@ class PostNotifier extends AutoDisposeAsyncNotifier<PostState> {
     final cancelToken = ref.read(cancelTokenProvider);
     ref.onDispose(
       () {
-        if (state.isLoading) {
-          cancelToken.cancel();
-          ref.invalidate(cancelTokenProvider);
-        }
+        cancelToken.cancel();
+        ref.invalidate(cancelTokenProvider);
       },
     );
 
