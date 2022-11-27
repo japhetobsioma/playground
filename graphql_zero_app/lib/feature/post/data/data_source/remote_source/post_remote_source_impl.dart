@@ -15,11 +15,6 @@ class PostRemoteSourceImpl implements PostRemoteSource {
           id
           title
           body
-          user {
-            id
-            name
-            username
-          }
           comments {
             data {
               id

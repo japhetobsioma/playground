@@ -11,16 +11,28 @@ class PostModel extends Post {
   });
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
-    final comments = json['comments'] as Map<String, dynamic>;
-    final commentsData = comments['data'] as List<dynamic>;
-    final commentsList = commentsData.cast<Map<String, dynamic>>();
+    final user = () {
+      if (json['user'] == null) {
+        return const UserModel(id: '', name: '', username: '');
+      }
+      final userJson = json['user'] as Map<String, dynamic>;
+      return UserModel.fromJson(userJson);
+    }();
+
+    final comments = () {
+      if (json['comments'] == null) return <CommentModel>[];
+      final commentsJson = json['comments'] as Map<String, dynamic>;
+      final commentsData = commentsJson['data'] as List<dynamic>;
+      final commentsMap = commentsData.cast<Map<String, dynamic>>();
+      return List<CommentModel>.from(commentsMap.map(CommentModel.fromJson));
+    }();
 
     return PostModel(
       id: json['id'] as String,
       title: json['title'] as String,
       body: json['body'] as String,
-      user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
-      comments: List.from(commentsList.map(CommentModel.fromJson)),
+      user: user,
+      comments: comments,
     );
   }
 }

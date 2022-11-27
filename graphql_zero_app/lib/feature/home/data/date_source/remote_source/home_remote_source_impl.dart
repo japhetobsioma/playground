@@ -21,13 +21,6 @@ class HomeRemoteSourceImpl implements HomeRemoteSource {
               name
               username
             }
-            comments {
-              data {
-                id
-                name
-                body
-              }
-            }
           }
         }
       }
