@@ -1,5 +1,31 @@
+import 'package:collection/collection.dart';
+
 void main() {
-  const puzzleInput = '''
+  final elves = puzzleInput
+      .split('\n\n')
+      .map((e) => e.split('\n'))
+      .map((e) => e.map((e) => int.tryParse(e) ?? 0).toList())
+      .toList();
+
+  var mostCalories = 0;
+  final elvesCalories = <int>[];
+
+  for (final elf in elves) {
+    final caloriesSum = elf.sum;
+    if (caloriesSum > mostCalories) mostCalories = caloriesSum;
+
+    elvesCalories.add(caloriesSum);
+  }
+  print('Part one answer: $mostCalories');
+
+  final sortedTotal = elvesCalories..sort();
+  final length = sortedTotal.length;
+  final topThree = sortedTotal.getRange(length - 3, length).toList();
+  final topThreeTotal = topThree.sum;
+  print('Part two answer: $topThreeTotal');
+}
+
+const puzzleInput = '''
 11334
 6264
 9318
@@ -2266,26 +2292,3 @@ void main() {
 6865
 1691
 ''';
-
-  final matches = puzzleInput.split('\n\n');
-
-  final groups = matches.map((e) => e.split('\n')).toList();
-
-  final totalsGroup = <int>[];
-
-  for (final e in groups) {
-    final numbers = e.map((e) => int.tryParse(e) ?? 0).toList();
-    totalsGroup.add(numbers.fold(0, (prev, next) => prev + next));
-  }
-
-  final sorted = totalsGroup..sort();
-
-  final length = sorted.length;
-  final topThree = sorted.getRange(length - 3, length).toList();
-  print(
-    topThree.fold<int>(
-      0,
-      (previousValue, element) => previousValue + element,
-    ),
-  );
-}
