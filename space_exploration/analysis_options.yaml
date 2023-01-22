@@ -1,0 +1,35 @@
+include: package:very_good_analysis/analysis_options.yaml
+
+analyzer:
+  plugins:
+    - dart_code_metrics
+
+linter:
+  rules:
+    public_member_api_docs: false
+
+dart_code_metrics:
+  extends:
+    - package:dart_code_metrics/presets/all.yaml
+  metrics:
+    cyclomatic-complexity: 20
+    number-of-parameters: 4
+    maximum-nesting-level: 5
+  metrics-exclude:
+    - test/**
+  anti-patterns:
+    - long-method
+    - long-parameter-list
+  rules:
+    - prefer-static-class: false
+    - member-ordering:
+        order:
+          - constructors
+          - fields
+          - methods
+          - getters-setters
+    - prefer-correct-identifier-length:
+        exceptions: [ 'id' ]
+    - prefer-single-widget-per-file:
+        ignore-private-widgets: true
+    - avoid-ignoring-return-values: false
