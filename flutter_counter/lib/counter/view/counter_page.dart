@@ -42,7 +42,7 @@ class _CounterText extends ConsumerWidget {
 
     return Text(
       '$state',
-      style: Theme.of(context).textTheme.headline2,
+      style: Theme.of(context).textTheme.headlineMedium,
     );
   }
 }
