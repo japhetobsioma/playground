@@ -1,4 +1,4 @@
-import 'package:flutter_spotify_ui/common/spotify_api/model/song.dart';
+import 'package:flutter_spotify_ui/core/spotify_api/model/song.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'playlist.freezed.dart';

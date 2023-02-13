@@ -2,10 +2,10 @@ import 'package:graphql/client.dart';
 
 Future<T> graphqlHelper<T>({
   required GraphQLClient client,
+  required T Function(Map<String, dynamic> data) resultParser,
   String? query,
   String? mutation,
   Map<String, dynamic>? variables,
-  required T Function(Map<String, dynamic> data) resultParser,
 }) async {
   assert(
     query == null || mutation == null,

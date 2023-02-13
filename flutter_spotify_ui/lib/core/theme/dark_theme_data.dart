@@ -8,31 +8,30 @@ final darkThemeData = ThemeData(
   primaryColor: Colors.black,
   iconTheme: const IconThemeData().copyWith(color: Colors.white),
   fontFamily: FontFamily.montserrat,
-  colorScheme: ColorScheme.dark(
-    background: const Color(0xFF121212),
-    secondary: const Color(0xFF1DB954),
+  colorScheme: const ColorScheme.dark(
+    secondary: Color(0xFF1DB954),
   ),
   textTheme: TextTheme(
     displayMedium: const TextStyle(
       color: Colors.white,
-      fontSize: 32.0,
+      fontSize: 32,
       fontWeight: FontWeight.bold,
     ),
     headlineMedium: TextStyle(
-      fontSize: 12.0,
+      fontSize: 12,
       color: Colors.grey[300],
       fontWeight: FontWeight.w500,
-      letterSpacing: 2.0,
+      letterSpacing: 2,
     ),
     bodyLarge: TextStyle(
       color: Colors.grey[300],
-      fontSize: 14.0,
+      fontSize: 14,
       fontWeight: FontWeight.w600,
-      letterSpacing: 1.0,
+      letterSpacing: 1,
     ),
     bodyMedium: TextStyle(
       color: Colors.grey[300],
-      letterSpacing: 1.0,
+      letterSpacing: 1,
     ),
   ),
 );

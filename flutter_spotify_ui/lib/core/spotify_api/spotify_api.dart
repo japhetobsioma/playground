@@ -1,7 +1,11 @@
-import 'package:flutter_spotify_ui/common/helper/graphql_helper.dart';
-import 'package:flutter_spotify_ui/common/spotify_api/model/library.dart';
-import 'package:flutter_spotify_ui/common/spotify_api/model/playlist.dart';
+import 'package:flutter_spotify_ui/core/graphql_client.dart';
+import 'package:flutter_spotify_ui/core/helper/graphql_helper.dart';
+import 'package:flutter_spotify_ui/core/spotify_api/model/library.dart';
+import 'package:flutter_spotify_ui/core/spotify_api/model/playlist.dart';
 import 'package:graphql/client.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'spotify_api.g.dart';
 
 class SpotifyApi {
   const SpotifyApi({required GraphQLClient client}) : _client = client;
@@ -79,7 +83,16 @@ class SpotifyApi {
         }
       ''',
       variables: {'id': id},
-      resultParser: (data) => Playlist.fromJson(data['Playlist']),
+      resultParser: (data) {
+        final playlistData = data['Playlist'] as Map<String, dynamic>;
+        return Playlist.fromJson(playlistData);
+      },
     );
   }
+}
+
+@Riverpod(keepAlive: true, dependencies: [graphqlClient])
+SpotifyApi spotifyApi(SpotifyApiRef ref) {
+  final client = ref.watch(graphqlClientProvider);
+  return SpotifyApi(client: client);
 }
