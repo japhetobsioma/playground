@@ -9,5 +9,6 @@
 # Generated files
 **/*.freezed.dart
 **/*.g.dart
+**/*.gen.dart
 
 **/pubspec.lock
