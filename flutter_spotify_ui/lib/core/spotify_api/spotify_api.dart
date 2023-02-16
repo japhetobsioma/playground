@@ -1,4 +1,4 @@
-import 'package:flutter_spotify_ui/core/graphql_client.dart';
+import 'package:flutter_spotify_ui/core/graphql_client/graphql_client.dart';
 import 'package:flutter_spotify_ui/core/helper/graphql_helper.dart';
 import 'package:flutter_spotify_ui/core/spotify_api/model/library.dart';
 import 'package:flutter_spotify_ui/core/spotify_api/model/playlist.dart';
@@ -91,7 +91,7 @@ class SpotifyApi {
   }
 }
 
-@Riverpod(keepAlive: true, dependencies: [graphqlClient])
+@Riverpod(keepAlive: true)
 SpotifyApi spotifyApi(SpotifyApiRef ref) {
   final client = ref.watch(graphqlClientProvider);
   return SpotifyApi(client: client);

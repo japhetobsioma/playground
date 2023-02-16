@@ -19,7 +19,7 @@ class HomeRepository {
   }
 }
 
-@Riverpod(keepAlive: true, dependencies: [spotifyApi])
+@Riverpod(keepAlive: true)
 HomeRepository homeRepository(HomeRepositoryRef ref) {
   final api = ref.watch(spotifyApiProvider);
   return HomeRepository(api: api);

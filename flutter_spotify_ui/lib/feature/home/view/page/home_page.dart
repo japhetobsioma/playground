@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spotify_ui/feature/home/view/widget/home_playlist.dart';
 import 'package:flutter_spotify_ui/feature/home/view/widget/home_side_menu.dart';
 
 class HomePage extends StatelessWidget {
@@ -14,9 +15,7 @@ class HomePage extends StatelessWidget {
               children: const [
                 HomeSideMenu(),
                 Expanded(
-                  child: ColoredBox(
-                    color: Colors.black,
-                  ),
+                  child: HomePlaylist(),
                 ),
               ],
             ),

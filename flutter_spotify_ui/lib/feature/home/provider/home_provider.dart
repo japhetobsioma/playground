@@ -4,12 +4,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'home_provider.g.dart';
 
-@Riverpod(dependencies: [homeRepository])
+@riverpod
 class HomeNotifier extends _$HomeNotifier {
   HomeRepository get _repository => ref.read(homeRepositoryProvider);
 
   @override
-  FutureOr<HomeState> build({required int page}) async {
+  FutureOr<HomeState> build() async {
     final yourLibrary = await _repository.getAllLibraries();
     final playlists = await _repository.getAllPlaylists();
     final currentPlaylist = await _repository.getPlaylist(id: '6');
