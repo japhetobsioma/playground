@@ -8,11 +8,15 @@ class HomePackageList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final packageList = ref.watch(homeNotifierProvider(page: 1));
+    final packageList = ref.watch(homePackagesProvider);
 
     return Expanded(
       child: RefreshIndicator(
-        onRefresh: () async => ref.invalidate(homeNotifierProvider),
+        onRefresh: () async {
+          ref
+            ..invalidate(homeNotifierProvider)
+            ..invalidate(homePackagesProvider);
+        },
         child: packageList.when(
           skipLoadingOnRefresh: false,
           error: (error, _) => Text('Error $error'),
@@ -22,9 +26,9 @@ class HomePackageList extends ConsumerWidget {
           ),
           data: (data) {
             return ListView.builder(
-              itemCount: data.packages.length,
+              itemCount: data.length,
               itemBuilder: (_, index) {
-                final package = data.packages[index];
+                final package = data[index];
 
                 return _PackageItem(
                   name: package.name,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pub_riverpod_code_gen/feature/home/provider/home_provider.dart';
 
 class HomeSearchBar extends StatelessWidget {
   const HomeSearchBar({super.key});
@@ -67,11 +69,13 @@ class _SearchIcon extends StatelessWidget {
   }
 }
 
-class _TextField extends StatelessWidget {
+class _TextField extends ConsumerWidget {
   const _TextField();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.read(homeNotifierProvider.notifier);
+
     return Expanded(
       child: Center(
         child: TextField(
@@ -85,6 +89,7 @@ class _TextField extends StatelessWidget {
               color: Colors.grey.shade400,
             ),
           ),
+          onChanged: notifier.setSearch,
           onEditingComplete: () {
             FocusManager.instance.primaryFocus?.unfocus();
           },
